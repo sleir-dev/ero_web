@@ -1,0 +1,115 @@
+
+.center-container {
+  height: 100vh; /* or a fixed height */
+  display: flex;
+  justify-content: center; /* horizontal */
+  align-items: center;     /* vertical */
+  position: relative;
+}
+
+.content {
+  text-align: center; /* optional: for text/button inside */
+}
+
+.overlay-square {
+    width: 1000px;              /* adjust size */
+    height: 1000px;
+    background: rgba(255, 195, 255, 0.75); /* R‑G‑B + 45 % opacity */
+    backdrop-filter: blur(2px);       /* optional: softens whatever is behind */
+    
+    position: absolute;        /* take it out of normal flow */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* pull it back by half its own size */
+    
+    border-radius: 5px;       /* rounded corners—remove if you want sharp */
+}
+
+.padded-title {
+  padding: 20px; /* adds 20px padding on all sides */
+}
+
+.padded-text {
+  padding: 50px;
+}
+
+/* Fixed vertical box on the right */
+.right-image-box {
+  position: fixed;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  width: 300px;
+  height: 1000px;
+  /* height: calc(4 * 100px + 3 * 10px); /* 4 images + 10px spacing */
+  background: rgba(255, 195, 255, 0.75);
+  padding: 10px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+}
+
+/* Stack images vertically with spacing */
+.scrollable-images {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Uniform image sizing */
+.scrollable-images img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.title {
+  position: absolute;
+  top: 150px;         /* distance from the top */
+  left: 50%;         /* center horizontally */
+  transform: translateX(-50%);
+  margin: 0;
+  font-size: 50px;
+  font-weight: bold;
+}
+
+.glitch-container {
+    position: fixed;  /* stay fixed relative to viewport */
+  top: 0;
+  left: 0;
+  width: 100vw;     /* full viewport width */
+  height: 100vh;    /* full viewport height */
+  z-index: -1;    /* make sure it’s above/below as needed */
+}
+
+/* The noise overlay */
+.glitch-container::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background: url('static.jpg') repeat;
+  opacity: 0.15; /* transparency of static */
+  animation: noiseAnim 0.3s steps(10) infinite;
+  mix-blend-mode: screen; /* blends nicely on dark bg */
+  z-index: 10;
+  border-radius: 6px; /* match your element's corners if needed */
+}
+
+
+
+/* Animation steps for noise shift */
+@keyframes noiseAnim {
+  0%, 100% { background-position: 0 0; }
+  10% { background-position: -5% -5%; }
+  20% { background-position: -10% 10%; }
+  30% { background-position: 5% -10%; }
+  40% { background-position: -5% 5%; }
+  50% { background-position: 10% 0; }
+  60% { background-position: -10% 5%; }
+  70% { background-position: 5% 10%; }
+  80% { background-position: 0 -5%; }
+  90% { background-position: 10% -10%; }
+}
